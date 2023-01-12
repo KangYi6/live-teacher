@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>Android vue interact with native midi</title>
+</head>
+<body>
+<p>
+<input type="button" value="打开midi设备" onClick="jsCallNative('open_midi_device')" />
+</p>
+<p>
+<input type="button" value="发送midi符号到midi设备" onClick="jsCallNative('send_midi_note')" />
+</p>
+<p>
+<input type="input" value="" id="midi_note"/>
+</p>
+<script type="text/javascript">
+    function nativeCallJS(cmd) {
+        const noteInput =  document.getElementById('midi_note');
+        noteInput.value=cmd;
+<!--        alert("ReceiveMidiNote:"+cmd);-->
+    }
+    function jsCallNative(cmd) {
+        if(typeof JsInterface !== "undefined" && JsInterface !== null) {
+            JsInterface.callNative(cmd);
+        } else {
+            alert("Not viewing in webview");
+        }
+    }
+</script>
+
+</body>
+</html>
